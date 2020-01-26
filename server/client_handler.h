@@ -5,10 +5,21 @@
 #ifndef EX4_SERVER_CLIENT_HANDLER_H_
 #define EX4_SERVER_CLIENT_HANDLER_H_
 
+#include <iostream>
+
+using namespace std;
+
 class ClientHandler {
  public:
-  virtual handleClient(int clientSocket) = 0;
-  virtual clone() {};
+  virtual void handleClient(int clientSocket) = 0;
+};
+
+class AbstractClientHandler: ClientHandler {
+ private:
+  char buffer[1024] = {0};
+  int bytesRead = 0;
+ public:
+  string ReadFromClient(int clientSocket);
 };
 
 #endif //EX4_SERVER_CLIENT_HANDLER_H_
