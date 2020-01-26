@@ -13,7 +13,7 @@ bool FileCacheManager<P, S>::InCache(P key) {
   /**
   * check if the key is in cache by checking if the file exists
   */
-  ifstream f(key.HashFileName().c_str());
+  ifstream f(to_string(hash<P>(key)) + ".txt");
   return f.good();
 }
 template <class P, class S>
@@ -24,7 +24,7 @@ S FileCacheManager<P, S>::Get(P key) {
   if (!this->InCache(key)) {
     throw "no such key in cache";
   }
-  ifstream f(key.HashFileName());
+  ifstream f(to_string(hash<P>(key)) + ".txt");
   S toReturn(f);
   f.close();
   return toReturn;
@@ -34,7 +34,7 @@ void FileCacheManager<P, S>::Add(P key, S value) {
   /**
    * add the key:value to the cache
    */
-  ofstream f(key.HashFileName);
+  ofstream f(to_string(hash<P>(key)) + ".txt");
   value.WriteTo(f);
   f.close();
 }
