@@ -16,13 +16,8 @@ class MyTestClientHandler: public AbstractClientHandler {
   CacheManager<string, string>* cache;
   Solver<string, string>* slv;
  public:
-  MyTestClientHandler(Solver<string, string>* slv) : slv(slv) {
-    this->cache = new FileCacheManager<string, string();
-  };
+  MyTestClientHandler(Solver<string, string>* slv, FileCacheManager<string, string>* cache) : slv(slv), cache(cache) {};
   void handleClient(int clientSocket) override;
-  ~MyTestClientHandler() {
-    delete this->cache;
-  }
 };
 
 #endif //EX4_SERVER_MY_TEST_CLIENT_HANDLER_H_
