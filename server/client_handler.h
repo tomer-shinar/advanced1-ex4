@@ -20,6 +20,7 @@ class AbstractClientHandler: ClientHandler {
   int bytesRead = 0;
  public:
   string ReadFromClient(int clientSocket);
+  void FinishReading();
 };
 
 #endif //EX4_SERVER_CLIENT_HANDLER_H_
