@@ -9,14 +9,17 @@
 #include <utility>
 #include "../cache/file_cache_manager.h"
 #include "../solvers/solver.h"
+#include "Problem.h"
+#include "Solution.h"
 
 
 class MyTestClientHandler: public AbstractClientHandler {
  private:
-  CacheManager<string, string>* cache;
-  Solver<string, string>* slv;
+  CacheManager<StringProblem, StringSolution>* cache;
+  Solver<StringProblem, StringSolution>* slv;
  public:
-  MyTestClientHandler(Solver<string, string>* slv, FileCacheManager<string, string>* cache) : slv(slv), cache(cache) {};
+  MyTestClientHandler(Solver<StringProblem, StringSolution>* slv, FileCacheManager<StringProblem, StringSolution>*
+      cache) : slv(slv), cache(cache) {};
   void handleClient(int clientSocket) override;
 };
 

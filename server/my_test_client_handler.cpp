@@ -12,16 +12,19 @@ void MyTestClientHandler::handleClient(int clientSocket) {
   /**
    *
    */
-  string line, sol;
+  string line;
+  StringSolution sol;
   while ((line = this->ReadFromClient(clientSocket)) != "end") {
-    if (this->cache->InCache(line))
-      sol = this->cache->Get(line);
+    StringProblem prob(line);
+    if (this->cache->InCache(prob))
+      sol = this->cache->Get(prob);
     else {
-      sol = this->slv->solve(line);
-      this->cache->Add(line, sol);
+      sol = this->slv->solve(prob);
+      this->cache->Add(prob, sol);
     }
-    sol += "\n";
-    int is_sent = send(clientSocket, sol.c_str(), strlen(sol.c_str()), 0);
+    string to_send = sol.ToString();
+    to_send += "\n";
+    int is_sent = send(clientSocket, to_send.c_str(), strlen(to_send.c_str()), 0);
   }
   close(clientSocket);
 }

@@ -14,7 +14,7 @@ class ClientHandler {
   virtual void handleClient(int clientSocket) = 0;
 };
 
-class AbstractClientHandler: ClientHandler {
+class AbstractClientHandler: public ClientHandler {
  private:
   char buffer[1024] = {0};
   int bytesRead = 0;
