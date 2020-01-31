@@ -5,10 +5,11 @@
 #include <algorithm>
 #include "StringReverser.h"
 
-string StringReverser::solve(string problem) {
+StringSolution StringReverser::solve(StringProblem problem) {
   /**
    * reverse a string and return it as the solution
    */
-  reverse(problem.begin(), problem.end());
-  return problem;
+   string s = problem.GetS();
+  reverse(s.begin(), s.end());
+  return StringSolution(s);
 }

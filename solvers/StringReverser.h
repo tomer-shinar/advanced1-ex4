@@ -7,12 +7,14 @@
 
 #include "solver.h"
 #include <iostream>
+#include "Problem.h"
+#include "Solution.h"
 
 using namespace std;
 
-class StringReverser : Solver<string, string> {
+class StringReverser : public Solver<StringProblem, StringSolution> {
  public:
-  string solve(string problem) override ;
+  StringSolution solve(StringProblem problem) override ;
 };
 
 #endif //EX4_SOLVERS_STRINGREVERSER_H_
