@@ -12,7 +12,7 @@ class DFS : AbstractBfsDfs<T> {
   /**
    * implement dfs algorithm
    */
-  void Add(Node<T> n) override {
+  void Add(Node<T>* n) override {
     this->to_visit.push_front(n);
   }
 };

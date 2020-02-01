@@ -7,6 +7,13 @@
 
 #include "searcher.h"
 #include <set>
+#include <iostream>
+
+template <class T>
+void free_all(vector<Node<T>*> vec) {
+  for (auto p: vec)
+    delete p;
+}
 
 template<class T>
 class AbstractSearcher : public Searcher<T> {
@@ -14,32 +21,43 @@ class AbstractSearcher : public Searcher<T> {
    * template class with the skeleton of the search algorithm
    */
  public:
-  string Search(Searchable<T>* problem) override {
+  SearchSolution Search(Searchable<T>* problem) override {
     /**
      * abstract searching
      */
     Add(problem->GetInitialState(), problem);
     set<pair<int, int>> closed;
+    vector<Node<T>*> to_free;
+    int evaluated = 0;
 
     while (Continue()) {
-      Node<T> n = GetNext();
-      if (problem->IsGoalState(n))
-        return problem->GetSolution(n);
-      closed.insert(n.GetInfo());
-      for (Node<T> s: problem->GetAllPossibleStates(n)) {
-        if (StopWhenOpening() && problem->IsGoalState(s))
-          return problem->GetSolution(s);
-        if (!closed.count(s))
+      Node<T>* n = GetNext();
+      evaluated++;
+      if (problem->IsGoalState(*n)) {
+        string str = problem->GetSolution(n);
+        free_all(to_free);
+        return SearchSolution(str, evaluated);
+      }
+      closed.insert(n->GetInfo());
+      for (Node<T>* s: problem->GetAllPossibleStates(n)) {
+        to_free.push_back(s);
+        if (StopWhenOpening() && problem->IsGoalState(*s)) {
+          string str = problem->GetSolution(s);
+          free_all(to_free);
+          return SearchSolution(str, evaluated);
+        }
+        if (!closed.count(s->GetInfo()))
           //not in closed
           Add(s, problem);
       }
     }
 
-    return string("no solution");
+    free_all(to_free);
+    return SearchSolution(string("no solution"), -1);
   }
-  virtual void Add(Node<T> n, Searchable<T>* problem) = 0;
+  virtual void Add(Node<T>* n, Searchable<T>* problem) = 0;
   virtual bool Continue() = 0;
-  virtual Node<T> GetNext() = 0;
+  virtual Node<T>* GetNext() = 0;
   virtual bool StopWhenOpening() = 0;
 
 };

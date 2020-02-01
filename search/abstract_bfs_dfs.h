@@ -14,14 +14,14 @@ class AbstractBfsDfs : AbstractSearcher<T> {
    * abstract class for the bfs and dfs algorithms
    */
  protected:
-  list<Node<T>> to_visit;
+  list<Node<T>*> to_visit;
  public:
   bool Continue() override {return !this->to_visit.empty();}
-  Node<T> GetNext() override {
+  Node<T>* GetNext() override {
     /**
      * the next node to visit
      */
-    Node<T> to_return = this->to_visit.front();
+    Node<T>* to_return = this->to_visit.front();
     this->to_visit.pop_front();
     return to_return;
   }

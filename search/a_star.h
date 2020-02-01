@@ -8,16 +8,16 @@
 #include "abstract_best_searcher.h"
 
 template <class T>
-class AStar : AbstractBestSearcher<T> {
+class AStar : public AbstractBestSearcher<T> {
   /**
    * implement A* algorithm
    */
  public:
-  double GetKey(Node<T> n, Searchable<T> problem) {
+  double GetKey(Node<T> n, Searchable<T>* problem) override {
     /**
      * returns the key for the node in the priority queue
      */
-    return n.GetCost() + problem.heuristics(n);
+    return n.GetCost() + problem->heuristics(n);
   }
 };
 

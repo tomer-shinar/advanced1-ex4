@@ -7,11 +7,12 @@
 
 #include <string>
 #include "searchable.h"
+#include "SearchSolution.h"
 
 template <class T>
 class Searcher {
  public:
-  virtual string Search(Searchable<T>* problem) = 0;
+  virtual SearchSolution Search(Searchable<T>* problem) = 0;
 };
 
 #endif //ADVANCED1_EX4_SEARCH_SEARCHER_H_

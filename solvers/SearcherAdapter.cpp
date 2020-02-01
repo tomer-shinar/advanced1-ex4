@@ -19,12 +19,15 @@ vector<int> to_vector(string s) {
   return values;
 }
 
-StringSolution SearcherAdapter::solve(StringVectorProblem problem) {
+SearchSolution SearcherAdapter::solve(StringVectorProblem problem) {
   vector<vector<int>> mat;
   int i;
   for (i = 0; i < problem.GetVec().size() - 2; i++) {
     //going other all lines accept the last 2
-    mat.push_back(to_vector(problem.GetVec()[i]));
+    int line = problem.GetVec().size();
+    //to_vector(line);
+    vector<int> push = to_vector(problem.GetVec()[i]);
+    mat.push_back(push);
   }
   pair<int, int> src, dst;
   src.first = to_vector(problem.GetVec()[i])[0];
@@ -32,5 +35,5 @@ StringSolution SearcherAdapter::solve(StringVectorProblem problem) {
   dst.first = to_vector(problem.GetVec()[i + 1])[0];
   dst.second = to_vector(problem.GetVec()[i + 1])[1];
   AStar<pair<int, int>> searcher;
-  return StringSolution(searcher.Search(new SearchableMatrix(mat, src, dst)));
+  return searcher.Search(new SearchableMatrix(mat, src, dst));
 }

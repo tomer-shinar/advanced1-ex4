@@ -15,7 +15,7 @@ class SearchableMatrix : public Searchable<pair<int, int>> {
   int row_len;
   pair<int, int> dst, src;
 
-  Node<pair<int, int> > next(Node<pair<int, int> > prev, int row, int col);
+  Node<pair<int, int> >* next(Node<pair<int, int> >* prev, int row, int col);
  public:
   SearchableMatrix(vector<vector<int>> mt, pair<int, int> src, pair<int, int> dst) : mat(mt), dst(dst), src(src),
   row_len(mat[0].size()) {
@@ -30,11 +30,11 @@ class SearchableMatrix : public Searchable<pair<int, int>> {
   SearchableMatrix(vector<vector<int>> mt) : SearchableMatrix(mt, pair<int, int>(0, 0), pair<int, int>(mt.size(),
       mt[0].size())) {};
 
-  Node<pair<int, int>> GetInitialState() override ;
+  Node<pair<int, int>>* GetInitialState() override ;
   bool IsGoalState(Node<pair<int, int>> n) override;
-  vector<Node<pair<int, int>>> GetAllPossibleStates(Node<pair<int, int>> n) override ;
+  vector<Node<pair<int, int>>*> GetAllPossibleStates(Node<pair<int, int>>* n) override ;
   double heuristics(Node<pair<int, int>> n) override ;
-  string GetSolution(Node<pair<int, int>> n) override ;
+  string GetSolution(Node<pair<int, int>>* n) override ;
 };
 
 #endif //ADVANCED1_EX4_SEARCH_SEARCHABLEMATRIX_H_

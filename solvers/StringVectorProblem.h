@@ -16,7 +16,7 @@ class StringVectorProblem : Problem {
  private:
   vector<string> vec;
  public:
-  StringVectorProblem(vector<string> vec): vec(std::move(vec)) {};
+  StringVectorProblem(vector<string> vec): vec(vec) {};
   string hash() override;
   vector<string> GetVec();
 };

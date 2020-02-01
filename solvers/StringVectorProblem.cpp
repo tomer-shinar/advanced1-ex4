@@ -3,6 +3,7 @@
 //
 
 #include "StringVectorProblem.h"
+#include <iostream>
 
 string StringVectorProblem::hash() {
   string all;
