@@ -10,13 +10,13 @@ string AbstractClientHandler::ReadFromClient(int clientSocket) {
   /**
    * read from one line from the client
    */
-   while(string(buffer).find('\n') == string::npos || string(buffer).find('\n') > this->bytesRead) {
+   while(string(buffer).substr(0, bytesRead).find('\n') == string::npos || string(buffer).find('\n') > this->bytesRead) {
      //haven't received \n yet
     this->bytesRead += read(clientSocket, buffer + this->bytesRead, 1024 - bytesRead);
    }
-   string line(buffer);
-   strcpy(buffer, line.substr(line.find('\n')).c_str());
-   this->bytesRead -= line.find('\n');
+   string line = string(buffer).substr(0, bytesRead);
+   strcpy(buffer, line.substr(line.find('\n') + 1).c_str());
+   this->bytesRead -= line.find('\n') + 1;
    return line.substr(0, line.find('\n') - 1);
 }
 

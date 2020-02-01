@@ -10,7 +10,7 @@ class CacheManager {
  public:
   virtual bool InCache(P key) = 0;
   virtual S Get(P key) = 0;
-  virtual void Add(P key, S value);
+  virtual void Add(P key, S value) = 0;
   virtual ~CacheManager() {};
 };
 

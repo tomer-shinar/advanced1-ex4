@@ -33,7 +33,7 @@ void MySerialServer::RunServer(int port, ClientHandler* handler) {
   }
 
   struct timeval tv;
-  tv.tv_sec = 3; // timeout
+  tv.tv_sec = 180; // timeout
   setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
 
   while (this->continueAccepting) {
@@ -49,5 +49,6 @@ void MySerialServer::RunServer(int port, ClientHandler* handler) {
 
 void MySerialServer::Stop() {
   this->continueAccepting = false;
-  this->serverLoop.join();
+  if (this->serverLoop.joinable())
+    this->serverLoop.join();
 }

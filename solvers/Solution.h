@@ -15,8 +15,8 @@ class Solution {
    * interface that every solution must implement
    */
  public:
-  virtual void ReadFrom(ifstream f) = 0;
-  virtual void WriteTo(ofstream f) = 0;
+  virtual void ReadFrom(ifstream &f) = 0;
+  virtual void WriteTo(ofstream &f) = 0;
   virtual string ToString() = 0;
 };
 
@@ -24,12 +24,14 @@ class StringSolution: public Solution {
  private:
   string s;
  public:
-  StringSolution() = default;
+  StringSolution() {
+    this->s = "";
+  };
   explicit StringSolution(string s) : s(std::move(s)) {};
-  void ReadFrom(ifstream f) override {
-    f >> s;
+  virtual void ReadFrom(ifstream &f) {
+    f >> this->s;
   }
-  void WriteTo(ofstream f) override {
+  void WriteTo(ofstream &f) override {
     f << s;
   }
   string ToString() override {
