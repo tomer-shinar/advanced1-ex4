@@ -20,18 +20,17 @@ vector<Node<pair<int, int> >* > SearchableMatrix::GetAllPossibleStates(Node<pair
    */
    vector<Node<pair<int, int> >* > v;
    if (n->GetInfo().first - 1 >= 0) {
-     v.push_back(next(n, n->GetInfo().first - 1, n->GetInfo().second));
-   }
-  if (n->GetInfo().first + 1 < this->mat.size()) {
-    v.push_back(next(n, n->GetInfo().first + 1, n->GetInfo().second));
+    v.push_back(next(n, n->GetInfo().first - 1, n->GetInfo().second));
   }
   if (n->GetInfo().second - 1 >= 0) {
     v.push_back(next(n, n->GetInfo().first, n->GetInfo().second - 1));
   }
-  if (n->GetInfo().second + 1 < this->row_len) {
+   if (n->GetInfo().second + 1 < this->row_len) {
     v.push_back(next(n, n->GetInfo().first, n->GetInfo().second + 1));
   }
-
+   if (n->GetInfo().first + 1 < this->mat.size()) {
+    v.push_back(next(n, n->GetInfo().first + 1, n->GetInfo().second));
+  }
   return v;
 }
 
@@ -67,10 +66,10 @@ string SearchableMatrix::GetSolution(Node<pair<int, int> >* n) {
    Node<pair<int, int>> *current = n, *prev = n->GetPrev();
    while (prev != nullptr) {
      if (current != n) {
-       //not the last so we put "," before
+       //not the last so we put " ," before
+       solution = "," + solution;
      }
-     solution = "," + solution;
-     solution = get_direction(prev->GetInfo(), current->GetInfo()) + solution;
+     solution = get_direction(prev->GetInfo(), current->GetInfo()) + " (" + to_string((int) current->GetCost()) + ")" + solution;
      current = prev;
      prev = prev->GetPrev();
    }
@@ -82,9 +81,9 @@ string get_direction(pair<int, int> prev, pair<int, int> next) {
    * check in what direction the movement form prev to next is
    */
    if (prev.first == next.first + 1)
-     return string("Down");
+     return string("Up");
   if (prev.first == next.first - 1)
-    return string("Up");
+    return string("Down");
   if (prev.second == next.second + 1)
     return string("Left");
   return string("Right");

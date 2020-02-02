@@ -8,11 +8,11 @@
 #include "abstract_bfs_dfs.h"
 
 template<class T>
-class DFS : AbstractBfsDfs<T> {
+class DFS : public AbstractBfsDfs<T> {
   /**
    * implement dfs algorithm
    */
-  void Add(Node<T>* n) override {
+  void Add(Node<T>* n, Searchable<T>* problem) override {
     this->to_visit.push_front(n);
   }
 };

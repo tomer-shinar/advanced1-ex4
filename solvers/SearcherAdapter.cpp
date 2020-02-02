@@ -3,9 +3,9 @@
 //
 
 #include "SearcherAdapter.h"
-#include "SearchableMatrix.h"
+#include "../search/SearchableMatrix.h"
 #include <sstream>
-#include "a_star.h"
+#include "../search/a_star.h"
 
 vector<int> to_vector(string s) {
   /**

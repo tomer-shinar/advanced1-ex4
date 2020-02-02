@@ -32,6 +32,8 @@ class AbstractSearcher : public Searcher<T> {
 
     while (Continue()) {
       Node<T>* n = GetNext();
+      if (closed.count(n->GetInfo()))
+        continue;
       evaluated++;
       if (problem->IsGoalState(*n)) {
         string str = problem->GetSolution(n);

@@ -8,12 +8,12 @@
 #include "abstract_best_searcher.h"
 
 template <class T>
-class BestFirstSearch : AbstractBestSearcher<T> {
+class BestFirstSearch : public AbstractBestSearcher<T> {
   /**
    * implement Best First Search algorithm
    */
  public:
-  double GetKey(Node<T> n, Searchable<T> problem) {
+  double GetKey(Node<T> n, Searchable<T>* problem) override {
     /**
      * returns the key for the node in the priority queue
      */

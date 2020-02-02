@@ -6,9 +6,9 @@
 #define ADVANCED1_EX4_SOLVERS_SEARCHERADAPTER_H_
 
 #include "solver.h"
-#include "searcher.h"
+#include "../search/searcher.h"
 #include "StringVectorProblem.h"
-#include "SearchSolution.h"
+#include "../search/SearchSolution.h"
 
 class SearcherAdapter : public Solver<StringVectorProblem, SearchSolution> {
   /**

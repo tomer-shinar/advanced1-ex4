@@ -5,7 +5,7 @@
 #ifndef ADVANCED1_EX4_SEARCH_SEARCHSOLUTION_H_
 #define ADVANCED1_EX4_SEARCH_SEARCHSOLUTION_H_
 
-#include "Solution.h"
+#include "../solvers/Solution.h"
 
 class SearchSolution : Solution{
  private:

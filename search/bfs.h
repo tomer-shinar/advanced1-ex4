@@ -6,13 +6,14 @@
 #define ADVANCED1_EX4_SEARCH_BFS_H_
 
 #include "abstract_bfs_dfs.h"
+#include "iostream"
 
 template<class T>
-class BFS : AbstractBfsDfs<T> {
+class BFS : public AbstractBfsDfs<T> {
   /**
    * implement bfs algorithm
    */
-   void Add(Node<T>* n) override {
+   void Add(Node<T>* n, Searchable<T>* problem) override {
      this->to_visit.push_back(n);
    }
 };

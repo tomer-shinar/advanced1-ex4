@@ -12,6 +12,11 @@ string AbstractClientHandler::ReadFromClient(int clientSocket) {
    */
    while(string(buffer).substr(0, bytesRead).find('\n') == string::npos) {
      //haven't received \n yet
+     if (string(buffer).substr(0, bytesRead) == "end") {
+       //this is end without \n after
+       bytesRead = 0;
+       return string("end");
+     }
     this->bytesRead += read(clientSocket, buffer + this->bytesRead, 1024 - bytesRead);
    }
    string line = string(buffer).substr(0, bytesRead);

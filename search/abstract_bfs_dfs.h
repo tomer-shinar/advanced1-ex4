@@ -9,7 +9,7 @@
 #include <list>
 
 template <class T>
-class AbstractBfsDfs : AbstractSearcher<T> {
+class AbstractBfsDfs : public AbstractSearcher<T> {
   /**
    * abstract class for the bfs and dfs algorithms
    */

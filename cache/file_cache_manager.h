@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 
+using namespace std;
 
 template <class P, class S>
 class FileCacheManager: public CacheManager<P, S> {

@@ -29,3 +29,7 @@ void MyClientHandler::handleClient(int clientSocket) {
   int is_sent = send(clientSocket, to_send.c_str(), strlen(to_send.c_str()), 0);
   close(clientSocket);
 }
+
+ClientHandler * MyClientHandler::clone() {
+  return new MyClientHandler(this->slv, this->cache);
+}

@@ -34,7 +34,7 @@ void MyParallelServer::RunServer(int port, ClientHandler* handler) {
   struct timeval tv;
   tv.tv_sec = 180; // timeout
   setsockopt(sockfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-  if (listen(sockfd, 11) == -1)
+  if (listen(sockfd, 12) == -1)
     throw "failed listen";
   while (this->continueAccepting) {
     cout << "here";
@@ -42,7 +42,8 @@ void MyParallelServer::RunServer(int port, ClientHandler* handler) {
     int client_socket = accept(sockfd, (struct sockaddr *) &address, (socklen_t *) &address);
     if (client_socket == -1)
       this->Stop();
-    thread* t = new thread([handler, client_socket]{handler->handleClient(client_socket);});
+
+    thread* t = new thread([handler, client_socket]{handler->clone()->handleClient(client_socket);});
     t->detach();
     threads.push_back(t);
   }

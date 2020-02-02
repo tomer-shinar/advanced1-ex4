@@ -9,8 +9,8 @@
 #include <utility>
 #include "../cache/file_cache_manager.h"
 #include "../solvers/solver.h"
-#include "Problem.h"
-#include "Solution.h"
+#include "../solvers/Problem.h"
+#include "../solvers/Solution.h"
 
 
 class MyTestClientHandler: public AbstractClientHandler {

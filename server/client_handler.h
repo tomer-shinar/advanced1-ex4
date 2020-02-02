@@ -12,6 +12,7 @@ using namespace std;
 class ClientHandler {
  public:
   virtual void handleClient(int clientSocket) = 0;
+  virtual ClientHandler* clone() = 0;
 };
 
 class AbstractClientHandler: public ClientHandler {
